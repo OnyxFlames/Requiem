@@ -286,3 +286,9 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+# Microsoft specific fonts.
+consola.ttf
+consolab.ttf
+consolai.ttf
+consolaz.ttf

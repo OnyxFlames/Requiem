@@ -1,0 +1,5 @@
+Fix crash on render due to new state system. (Kind of fixed, but code is a fucken mess)
+
+Add 'Camera' class/actor that will be used to figure out where the camera is/should be looking and where to place dialog boxes and HUD items
+
+Figure out lighting shaders

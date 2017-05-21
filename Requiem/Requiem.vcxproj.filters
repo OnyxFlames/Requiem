@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Debug_Utils.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Maps\Tilemap.cpp">
+      <Filter>Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManagers\TextureManager.cpp">
+      <Filter>Resource Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedSprite.cpp" />
+    <ClCompile Include="Application_debug.cpp" />
+    <ClCompile Include="Application_render.cpp" />
+    <ClCompile Include="Application_loading.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="CollisionMesh.cpp" />
+    <ClCompile Include="DialogBox.cpp" />
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="States\Game_State.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="States\Playing_State.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Application_states.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.hpp" />
+    <ClInclude Include="build_info.hpp" />
+    <ClInclude Include="Debug_Utils.hpp" />
+    <ClInclude Include="Maps\Tilemap.hpp">
+      <Filter>Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManagers\TextureManager.hpp">
+      <Filter>Resource Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedSprite.hpp" />
+    <ClInclude Include="Renderer.hpp" />
+    <ClInclude Include="CollisionMesh.hpp" />
+    <ClInclude Include="DialogBox.hpp" />
+    <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="States\Game_State.hpp">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="States\Playing_State.hpp">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Builtins.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Maps">
+      <UniqueIdentifier>{8f5e2f4d-87fb-443d-b11f-9c7c98e7e88c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Managers">
+      <UniqueIdentifier>{b8b29709-c7ea-43b0-a8a2-7f90d720d1a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{3a7af371-b608-48d8-89a4-82c6333f8664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{9a86b8db-8d25-4acf-b946-4c7954eaa924}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Todo.txt">
+      <Filter>Misc</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
