@@ -27,6 +27,7 @@
     <ClInclude Include="CollisionMesh.hpp" />
     <ClInclude Include="Debug_Utils.hpp" />
     <ClInclude Include="DialogBox.hpp" />
+    <ClInclude Include="Loading_State.hpp" />
     <ClInclude Include="Maps\Tilemap.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="ResourceManagers\TextureManager.hpp" />
@@ -44,6 +45,7 @@
     <ClCompile Include="CollisionMesh.cpp" />
     <ClCompile Include="Debug_Utils.cpp" />
     <ClCompile Include="DialogBox.cpp" />
+    <ClCompile Include="Loading_State.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maps\Tilemap.cpp" />
     <ClCompile Include="Renderer.cpp" />

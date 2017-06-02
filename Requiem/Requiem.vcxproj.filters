@@ -25,6 +25,9 @@
       <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="Application_states.cpp" />
+    <ClCompile Include="Loading_State.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp" />
@@ -48,6 +51,9 @@
       <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="Builtins.hpp" />
+    <ClInclude Include="Loading_State.hpp">
+      <Filter>States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Maps">

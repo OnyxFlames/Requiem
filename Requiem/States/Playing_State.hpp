@@ -26,8 +26,8 @@ public:
 	Playing_State(Application &_app)
 		: Game_State(_app)
 	{
-		std::cout << "Game state created at 0x" << this << " (" << sizeof(Playing_State) << " bytes)\n";
-		std::cout << "Setting default camera\n";
+		//std::cout << "Game state created at 0x" << this << " (" << sizeof(Playing_State) << " bytes)\n";
+		//std::cout << "Setting default camera\n";
 		camera = app->get_window().getView();
 	}
 
