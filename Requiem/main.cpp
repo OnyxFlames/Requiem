@@ -22,9 +22,10 @@ int main(int argc, char* argv[])
 
 	if (argc > 1)
 	{
-		if (std::strcmp(argv[1], "--help") == 0)
+		if (std::strcmp(argv[1], "-h") == 0 || std::strcmp(argv[1], "--help") == 0)
 		{
 			std::cerr << "Game Demo build v" << BUILD_VERSION_MAJOR + "." + BUILD_VERSION_MINOR << "\n";
+			std::cerr << "Compiled on: " << __DATE__ << " at " << __TIME__ << "\n";
 #ifdef DEBUG
 			std::cerr << BUILD_EDITION;
 #endif
@@ -42,7 +43,7 @@ int main(int argc, char* argv[])
 	squares.set_texture(tm.get(TextureID::City));
 
 	Tilemap lake;
-	lake.set_texture(tm.get(TextureID::Cave));
+	lake.set_texture(tm.get(TextureID::City));
 	lake.load_from_file("../resources/maps/Lake.rmap");
 
 	Tilemap dirtpath;
