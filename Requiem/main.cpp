@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 	squares.set_texture(tm.get(TextureID::City));
 
 	Tilemap lake;
-	lake.set_texture(tm.get(TextureID::City));
+	lake.set_texture(tm.get(TextureID::Cave));
 	lake.load_from_file("../resources/maps/Lake.rmap");
 
 	Tilemap dirtpath;
