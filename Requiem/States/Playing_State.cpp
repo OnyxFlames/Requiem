@@ -289,9 +289,9 @@ void Playing_State::draw()
 		
 		//sf::sleep(sf::seconds(2.5f));
 		*/
-		sf::Clock timer;
-		sf::Time frame_count;
-		unsigned int frames = 0;
+		static sf::Clock timer;
+		static sf::Time frame_count;
+		static unsigned int frames = 0;
 		if (app->exit_render)
 			return;
 
@@ -308,8 +308,8 @@ void Playing_State::draw()
 				else
 				{
 					get_texts().at(graphic_rate)->setString("Graphic rate: " + std::to_string(frames));
-					frames = 0;
 				}
+				frames = 0;
 			}
 			app->get_window().clear();
 			for(size_t count = 0; count < get_maps().size(); count++)
