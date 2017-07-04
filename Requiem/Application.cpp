@@ -33,7 +33,7 @@ Application::Application()
 {	
 
 	/*Game State Test Code*/
-
+	/*
 	TextureManager tm;
 	tm.load(TextureID::City, "../resources/textures/roguelikeCity_transparent.png");
 	tm.load(TextureID::Cave, "../resources/textures/roguelikeDungeon_transparent.png");
@@ -71,66 +71,26 @@ Application::Application()
 
 	CollisionMesh coll;
 	coll.load_from_file("../resources/meshes/OutsideBounds.coll");
-
+	*/
 	pushState(std::make_unique<Playing_State>(*this));
-
+	/*
 	get_state().top()->add_player(std::make_unique<sf::Sprite>(player));
-	get_state().top()->add_a_sprite(std::make_unique<AnimatedSprite>(anim));
-	get_state().top()->add_a_sprite(std::make_unique<AnimatedSprite>(weapon_changer));
+	//get_state().top()->add_a_sprite(std::make_unique<AnimatedSprite>(anim));
+	//get_state().top()->add_a_sprite(std::make_unique<AnimatedSprite>(weapon_changer));
 	get_state().top()->add_collisionmesh(std::make_unique<CollisionMesh>(coll));
 
 	get_state().top()->add_tilemap(fountain.get_map());
 	get_state().top()->add_tilemap(dirtpath.get_map());
 	get_state().top()->add_tilemap(lake.get_map());
 	get_state().top()->add_tilemap(squares.get_map());
+	*/
 
-	sf::Text graphic_text;
-	sf::Text logic_text;
-	sf::Text build_info;
-	sf::Text player_position;
-	sf::Text objects;
-
-	camera = window.getView();
-
-	default_font.loadFromFile("../resources/fonts/consola.ttf");
-
-	graphic_text.setFont(default_font);
-	graphic_text.setFillColor(sf::Color::White);
-	graphic_text.setScale(0.5f, 0.5f);
-
-	logic_text.setFont(default_font);
-	logic_text.setFillColor(sf::Color::White);
-	logic_text.setScale(0.5f, 0.5f);
-	logic_text.setPosition(0.f, 14.f);
-
-	build_info.setFont(default_font);
-	build_info.setFillColor(sf::Color::White);
-	build_info.setScale(0.5f, 0.5f);
-	build_info.setString("Build v" + BUILD_VERSION_MAJOR + "." + BUILD_VERSION_MINOR + "\nResolution: " + (std::to_string(window.getSize().x) + "x" + std::to_string(window.getSize().y)));
-	build_info.setPosition(0.f, static_cast<float>(build_info.getGlobalBounds().height + 1.5f));
-
-	player_position.setFont(default_font);
-	player_position.setFillColor(sf::Color::Cyan);
-	player_position.setScale(0.5f, 0.5f);
-	player_position.setPosition(0.f, (build_info.getGlobalBounds().height + 2.f) * 2);
-
-	objects.setFont(default_font);
-	objects.setFillColor(sf::Color::Cyan);
-	objects.setScale(0.5f, 0.5f);
-	objects.setPosition(window.getSize().x - (objects.getGlobalBounds().width / 2), 0.f);
-
-
-	std::cout << "Attempted to add texts to current state\n";
-	get_state().top()->add_text(std::make_unique<sf::Text>(logic_text));
-	get_state().top()->add_text(std::make_unique<sf::Text>(graphic_text));
-	get_state().top()->add_text(std::make_unique<sf::Text>(build_info));
-	get_state().top()->add_text(std::make_unique<sf::Text>(player_position));
-	get_state().top()->add_text(std::make_unique<sf::Text>(objects));
+	// Text stuff was removed here.
 
 	if (get_state().top()->get_texts().size() < 5)
 	{
 		// Display the amount of texts that failed to load. Right now we're adding 5 so subtracts the vectors size from 5.
-		std::cout << "Failed to load states: " << (5 - get_state().top()->get_texts().size()) << "/5 failed\n";
+		//std::cout << "Failed to load text: " << (5 - get_state().top()->get_texts().size()) << "/5 failed\n";
 	}
 
 	window.setActive(false);

@@ -304,10 +304,12 @@ void Playing_State::draw()
 			{
 				frame_count = sf::seconds(0.f);
 				if (app->is_paused)
-					;// app->get_texts().at(graphic_rate)->setString("Graphic rate: " + std::to_string(frames) + " - paused");
+					get_texts().at(graphic_rate)->setString("Graphic rate: " + std::to_string(frames) + " - paused");
 				else
-					;// app->get_texts().at(graphic_rate)->setString("Graphic rate: " + std::to_string(frames));
+				{
+					get_texts().at(graphic_rate)->setString("Graphic rate: " + std::to_string(frames));
 					frames = 0;
+				}
 			}
 			app->get_window().clear();
 			for(size_t count = 0; count < get_maps().size(); count++)
@@ -347,10 +349,10 @@ void Playing_State::draw()
 				//if (dialog->isActive())
 					//app->get_window().draw(dialog->get_dialog());
 			}
-			
+			//std::cout << "Texts loaded: " << get_texts().size() << "\n";
 			for (size_t count = 0; count < get_texts().size(); count++)
 			{
-				std::cout << "Drawing text\n";
+				//std::cout << "Drawing text\n";
 				app->get_window().draw(*get_texts()[count]);
 			}
 			app->get_window().display();
