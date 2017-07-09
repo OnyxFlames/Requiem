@@ -303,12 +303,12 @@ void Playing_State::draw()
 			else
 			{
 				frame_count = sf::seconds(0.f);
-				if (app->is_paused)
-					get_texts().at(graphic_rate)->setString("Graphic rate: " + std::to_string(frames) + " - paused");
-				else
-				{
+				//if (app->is_paused)
+					//get_texts().at(graphic_rate)->setString("Graphic rate: " + std::to_string(frames) + " - paused");
+				//else
+				//{
 					get_texts().at(graphic_rate)->setString("Graphic rate: " + std::to_string(frames));
-				}
+				//}
 				frames = 0;
 			}
 			app->get_window().clear();
