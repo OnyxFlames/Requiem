@@ -24,7 +24,8 @@ private:
 	//void load_data2(std::ifstream &file); // Possibly allow tilemaps to have multiple layers of tiles.
 public:
 	Tilemap();
-	void load_from_file(const std::string &filename);
+	Tilemap& operator=(const Tilemap&) = delete;
+	bool load_from_file(const std::string &filename);
 	void set_position(sf::Vector2f& _pos)
 	{
 		pos = _pos;

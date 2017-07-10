@@ -33,6 +33,7 @@
     <ClInclude Include="ResourceManagers\TextureManager.hpp" />
     <ClInclude Include="States\Game_State.hpp" />
     <ClInclude Include="States\Playing_State.hpp" />
+    <ClInclude Include="TilemapManager.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
@@ -52,6 +53,7 @@
     <ClCompile Include="ResourceManagers\TextureManager.cpp" />
     <ClCompile Include="States\Game_State.cpp" />
     <ClCompile Include="States\Playing_State.cpp" />
+    <ClCompile Include="TilemapManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Todo.txt" />

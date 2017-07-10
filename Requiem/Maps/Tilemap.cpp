@@ -1,6 +1,6 @@
 #include "Tilemap.hpp"
 
-Tilemap::Tilemap()
+Tilemap::Tilemap() 
 	:	pos(sf::Vector2i(0, 0))
 {
 }
@@ -54,7 +54,7 @@ void Tilemap::set_map(unsigned _width, unsigned _height, std::vector<std::vector
 	map_height = _height;
 }
 
-void Tilemap::load_from_file(const std::string &filename)
+bool Tilemap::load_from_file(const std::string &filename)
 {
 	std::ifstream map(filename);
 	std::ifstream mappos(filename + "pos");
@@ -62,7 +62,7 @@ void Tilemap::load_from_file(const std::string &filename)
 	if (!map.is_open() || !mappos.is_open() || !mapsize.is_open())
 	{
 		std::cerr << "Error loading map data for \'" << filename << "\'\n";
-		return;
+		return false;
 	}
 	std::string buff = "";
 	mapsize >> buff;
@@ -90,5 +90,5 @@ void Tilemap::load_from_file(const std::string &filename)
 		}
 		data.push_back(vecbuff);
 	}
-
+	return true;
 }

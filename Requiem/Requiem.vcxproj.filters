@@ -28,14 +28,12 @@
     <ClCompile Include="Loading_State.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="TilemapManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp" />
     <ClInclude Include="build_info.hpp" />
     <ClInclude Include="Debug_Utils.hpp" />
-    <ClInclude Include="Maps\Tilemap.hpp">
-      <Filter>Maps</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceManagers\TextureManager.hpp">
       <Filter>Resource Managers</Filter>
     </ClInclude>
@@ -54,6 +52,10 @@
     <ClInclude Include="Loading_State.hpp">
       <Filter>States</Filter>
     </ClInclude>
+    <ClInclude Include="Maps\Tilemap.hpp">
+      <Filter>Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="TilemapManager.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Maps">
