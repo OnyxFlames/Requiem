@@ -109,7 +109,7 @@ void Application::input()
 				/*-Non-keyboard input based events-*/
 			case sf::Event::Closed:
 				exit_render = true;
-				std::cout << "Waiting on render thread to close...\n";
+				std::cout << "[App] Waiting on render thread to close...\n";
 				render_thread.wait(); break;
 				window.close();
 				break;

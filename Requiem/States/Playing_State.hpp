@@ -60,6 +60,7 @@ private:
 	bool camera_follow_player = false;
 	bool is_paused = false;
 	bool debug_noclip = false;
+	bool m_draw_bounds = false;
 	//Note: Once the camera class is added this will be phased out
 	sf::View camera;
 

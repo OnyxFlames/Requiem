@@ -47,6 +47,9 @@ void Playing_State::input()
 				case sf::Keyboard::D:
 					m_moveright = true;
 					break;
+				case sf::Keyboard::Tilde:
+					m_draw_bounds = !m_draw_bounds;
+					break;
 				case sf::Keyboard::I:
 					//camera.zoom(0.5f);
 #ifdef DEBUG
@@ -255,7 +258,7 @@ void Playing_State::update(sf::Time dt)
 			players[0].get()->getPosition().x + (players[0].get()->getGlobalBounds().width / 2),
 			players[0].get()->getPosition().y + (players[0].get()->getGlobalBounds().height / 2));
 	else
-		;// camera.setCenter(static_cast<float>(app->get_window().getSize().x / 2), static_cast<float>(app->get_window().getSize().y / 2));
+		camera.setCenter(static_cast<float>(app->get_window().getSize().x / 2), static_cast<float>(app->get_window().getSize().y / 2));
 
 	for (size_t count = 0; count < get_a_sprites().size(); count++)
 		get_a_sprites()[count]->update(dt);
@@ -342,7 +345,7 @@ void Playing_State::draw()
 			//for (auto &a_sprite : app->get_a_sprites())
 			for (size_t count = 0; count < get_a_sprites().size(); count++)
 			{
-				//app->get_window().draw(*get_a_sprites()[count]);
+				app->get_window().draw(*get_a_sprites()[count]);
 			}
 			//for (auto &dialog : app->get_dialogs())
 			{
@@ -354,6 +357,42 @@ void Playing_State::draw()
 			{
 				//std::cout << "Drawing text\n";
 				app->get_window().draw(*get_texts()[count]);
+			}
+			if (m_draw_bounds)
+			{
+				std::vector<sf::RectangleShape> bounds;
+				sf::RectangleShape rect;
+				rect.setOutlineColor(sf::Color::Blue);
+				rect.setOutlineThickness(1.f);
+				rect.setFillColor(sf::Color(0, 0, 0, 0));
+				for (size_t count = 0; count < get_texts().size(); count++)
+				{
+					rect.setPosition(
+						get_texts()[count]->getPosition().x,
+						get_texts()[count]->getPosition().y);
+					rect.setSize(sf::Vector2f
+					(
+						get_texts()[count]->getGlobalBounds().width,
+						get_texts()[count]->getGlobalBounds().height
+					));
+					bounds.push_back(rect);
+				}
+				for (size_t count = 0; count < get_maps().size(); count++)
+				{
+					rect.setPosition(
+						get_maps()[count]->getPosition().x,
+						get_maps()[count]->getPosition().y);
+					rect.setSize(sf::Vector2f
+					(
+						get_maps()[count]->getGlobalBounds().width,
+						get_maps()[count]->getGlobalBounds().height
+					));
+					bounds.push_back(rect);
+				}
+				for (auto &c : bounds)
+				{
+					app->get_window().draw(c);
+				}
 			}
 			app->get_window().display();
 }
