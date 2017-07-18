@@ -29,6 +29,7 @@
       <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="TilemapManager.cpp" />
+    <ClCompile Include="Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp" />
@@ -56,6 +57,7 @@
       <Filter>Maps</Filter>
     </ClInclude>
     <ClInclude Include="TilemapManager.hpp" />
+    <ClInclude Include="Camera.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Maps">

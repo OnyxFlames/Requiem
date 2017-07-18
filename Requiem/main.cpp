@@ -69,19 +69,19 @@ int main(int argc, char* argv[])
 
 	Application app;
 
-	app.pushState(std::make_unique<Playing_State>(app));
+	//app.pushState(std::make_unique<Playing_State>(app));
 
 	app.get_state().top()->add_player(std::make_unique<sf::Sprite>(player));
-	//app.get_state().top()->add_a_sprite(std::make_unique<AnimatedSprite>(anim));
-	//app.get_state().top()->add_a_sprite(std::make_unique<AnimatedSprite>(weapon_changer));
+	app.get_state().top()->add_a_sprite(std::make_unique<AnimatedSprite>(anim));
+	app.get_state().top()->add_a_sprite(std::make_unique<AnimatedSprite>(weapon_changer));
 	app.get_state().top()->add_collisionmesh(std::make_unique<CollisionMesh>(coll));
 	
 	//app.get_state().top()->add_text(std::make_unique<sf::Text>());
 
-	app.get_state().top()->add_tilemap(fountain.get_map());
-	app.get_state().top()->add_tilemap(dirtpath.get_map());
-	app.get_state().top()->add_tilemap(lake.get_map());
-	app.get_state().top()->add_tilemap(squares.get_map());
+	//app.get_state().top()->add_tilemap(fountain.get_map());
+	//app.get_state().top()->add_tilemap(dirtpath.get_map());
+	//app.get_state().top()->add_tilemap(lake.get_map());
+	//app.get_state().top()->add_tilemap(squares.get_map());
 
 
 	sf::Text graphic_text;
