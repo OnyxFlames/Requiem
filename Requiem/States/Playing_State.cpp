@@ -363,7 +363,7 @@ void Playing_State::draw()
 				std::vector<sf::RectangleShape> bounds;
 				sf::RectangleShape rect;
 				rect.setOutlineColor(sf::Color::Blue);
-				rect.setOutlineThickness(1.f);
+				rect.setOutlineThickness(2.f);
 				rect.setFillColor(sf::Color(0, 0, 0, 0));
 				for (size_t count = 0; count < get_texts().size(); count++)
 				{
@@ -386,6 +386,42 @@ void Playing_State::draw()
 					(
 						get_maps()[count]->getGlobalBounds().width,
 						get_maps()[count]->getGlobalBounds().height
+					));
+					bounds.push_back(rect);
+				}
+				for (size_t count = 0; count < get_players().size(); count++)
+				{
+					rect.setPosition(
+						get_players()[count]->getPosition().x,
+						get_players()[count]->getPosition().y);
+					rect.setSize(sf::Vector2f
+					(
+						get_players()[count]->getGlobalBounds().width,
+						get_players()[count]->getGlobalBounds().height
+					));
+					bounds.push_back(rect);
+				}
+				for (size_t count = 0; count < get_sprites().size(); count++)
+				{
+					rect.setPosition(
+						get_sprites()[count]->getPosition().x,
+						get_sprites()[count]->getPosition().y);
+					rect.setSize(sf::Vector2f
+					(
+						get_sprites()[count]->getGlobalBounds().width,
+						get_sprites()[count]->getGlobalBounds().height
+					));
+					bounds.push_back(rect);
+				}
+				for (size_t count = 0; count < get_a_sprites().size(); count++)
+				{
+					rect.setPosition(
+						get_a_sprites()[count]->getPosition().x,
+						get_a_sprites()[count]->getPosition().y);
+					rect.setSize(sf::Vector2f
+					(
+						get_a_sprites()[count]->getGlobalBounds().width,
+						get_a_sprites()[count]->getGlobalBounds().height
 					));
 					bounds.push_back(rect);
 				}
