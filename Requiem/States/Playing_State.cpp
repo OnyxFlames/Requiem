@@ -23,7 +23,7 @@ void Playing_State::input()
 				break;
 			case sf::Event::Resized:
 				app->get_window().setSize({ event.size.width, event.size.height });
-				//texts.at(build_info)->setString("Build v" + BUILD_VERSION_MAJOR + "." + BUILD_VERSION_MINOR + "\nResolution: " + (std::to_string(app->get_window().getSize().x) + "x" + std::to_string(app->get_window().getSize().y)));
+				texts.at(build_info)->setString("Build v" + BUILD_VERSION_MAJOR + "." + BUILD_VERSION_MINOR + "\nResolution: " + (std::to_string(app->get_window().getSize().x) + "x" + std::to_string(app->get_window().getSize().y)));
 				break;
 				/*-Key Pressed Events*/
 			case sf::Event::KeyPressed:

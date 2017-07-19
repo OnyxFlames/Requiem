@@ -17,6 +17,7 @@ TEST CODE
 #include "ResourceManagers/TextureManager.hpp"
 
 #include "AnimatedSprite.hpp"
+
 /*...*/
 
 
@@ -31,6 +32,45 @@ TEST CODE
 Application::Application()
 	: window(sf::VideoMode(DEFAULT_SCREENWIDTH, DEFAULT_SCREENHEIGHT), "Game Demo"), render_thread(&render_thread_function, this)
 {	
+	// load config information
+	sf::Vector2u dimensions = { DEFAULT_SCREENWIDTH, DEFAULT_SCREENHEIGHT };
+	std::ifstream lua("../resources/config.lua");
+	if (!lua.is_open())
+	{
+		std::cerr << "[Lua] Failed to find lua.config! Running with defaults.\n";
+	}
+	else
+	{
+		lua.close();
+		luaL_dofile(L, "resources/config.lua");
+		lua_getglobal(L, "width");
+		if (!lua_isnumber(L, 1) == 0)
+		{
+			std::cerr << "[Lua] Config file error! 'width' is not an integer.\n";
+			lua_pop(L, 1);
+		}
+		else
+		{
+			dimensions.x = (unsigned)lua_tonumber(L, 1);
+			std::cout << lua_tonumber(L, 1) << "\n";
+			lua_pop(L, 1);
+		}
+		lua_getglobal(L, "height");
+		if (!lua_isnumber(L, 1) == 0)
+		{
+			std::cerr << "[Lua] Config file error! 'height' is not an integer.\n";
+			lua_pop(L, 1);
+		}
+		else
+		{
+			dimensions.y = (unsigned)lua_tonumber(L, 1);
+			lua_pop(L, 1);
+		}
+
+		//window.setSize(dimensions);
+
+	}
+
 
 	/*Game State Test Code*/
 	/*
@@ -211,9 +251,6 @@ void Application::input()
 				switch (event.mouseButton.button)
 				{
 				case sf::Mouse::Left:
-					clickSpot.setPosition(0.f, 0.f);
-					clickSpot.move(event.mouseButton.x - clickSpot.getGlobalBounds().width / 2,
-											event.mouseButton.y - clickSpot.getGlobalBounds().height / 2);
 					break;
 				}
 			}

@@ -20,6 +20,10 @@
 
 #include "States/Game_State.hpp"
 
+#include "Lua_Main.hpp"
+
+
+
 /*
 enum builtins_index : unsigned char
 {
@@ -54,7 +58,7 @@ private:
 
 	sf::Font default_font;
 
-	sf::CircleShape clickSpot;
+	lua_State *L = init_lua();
 	
 	bool is_fullscreen = false;
 	/*
