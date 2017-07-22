@@ -42,9 +42,9 @@ Application::Application()
 	else
 	{
 		lua.close();
-		luaL_dofile(L, "resources/config.lua");
+		luaL_dofile(L, "../resources/config.lua");
 		lua_getglobal(L, "width");
-		if (!lua_isnumber(L, 1) == 0)
+		if (lua_isnumber(L, 1) == 0)
 		{
 			std::cerr << "[Lua] Config file error! 'width' is not an integer.\n";
 			lua_pop(L, 1);
@@ -56,7 +56,7 @@ Application::Application()
 			lua_pop(L, 1);
 		}
 		lua_getglobal(L, "height");
-		if (!lua_isnumber(L, 1) == 0)
+		if (lua_isnumber(L, 1) == 0)
 		{
 			std::cerr << "[Lua] Config file error! 'height' is not an integer.\n";
 			lua_pop(L, 1);
@@ -66,8 +66,8 @@ Application::Application()
 			dimensions.y = (unsigned)lua_tonumber(L, 1);
 			lua_pop(L, 1);
 		}
-
-		//window.setSize(dimensions);
+		
+		window.setSize(dimensions);
 
 	}
 

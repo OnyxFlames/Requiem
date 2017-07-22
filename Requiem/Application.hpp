@@ -88,6 +88,22 @@ public:
 	void popState();
 	void changeState(std::unique_ptr<Game_State> state);
 	std::stack<std::unique_ptr<Game_State>>& get_state();
+	sf::Vector2f getHUD()
+	{
+		return
+		{ 
+			camera.getCenter().x - camera.getSize().x / 2,
+			camera.getCenter().y - camera.getSize().y / 2
+		};
+	}
+	sf::Vector2f getHUD(sf::View &camera)
+	{
+		return
+		{
+			camera.getCenter().x - camera.getSize().x / 2,
+			camera.getCenter().y - camera.getSize().y / 2
+		};
+	}
 	/*...*/
 
 	/*Debug dialog box code*/

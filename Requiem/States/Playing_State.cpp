@@ -263,6 +263,10 @@ void Playing_State::update(sf::Time dt)
 	for (size_t count = 0; count < get_a_sprites().size(); count++)
 		get_a_sprites()[count]->update(dt);
 
+	sf::Vector2f text_spacing = {0.5f, 17.5f};
+	get_texts().at(logic_rate)->setPosition(app->getHUD(camera));
+	get_texts().at(graphic_rate)->setPosition(app->getHUD(camera) + text_spacing);
+	get_texts().at(build_info)->setPosition(app->getHUD(camera) + text_spacing + text_spacing);
 	app->get_window().setView(camera);
 }
 void Playing_State::draw()
