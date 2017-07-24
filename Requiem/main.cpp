@@ -11,8 +11,6 @@
 
 #include "Debug_Utils.hpp"
 
-#include "States/Playing_State.hpp"
-
 int main(int argc, char* argv[])
 {
 	TextureManager tm;
@@ -69,21 +67,6 @@ int main(int argc, char* argv[])
 
 	Application app;
 
-	//app.pushState(std::make_unique<Playing_State>(app));
-
-	app.get_state().top()->add_player(std::make_unique<sf::Sprite>(player));
-	app.get_state().top()->add_a_sprite(std::make_unique<AnimatedSprite>(anim));
-	app.get_state().top()->add_a_sprite(std::make_unique<AnimatedSprite>(weapon_changer));
-	app.get_state().top()->add_collisionmesh(std::make_unique<CollisionMesh>(coll));
-	
-	//app.get_state().top()->add_text(std::make_unique<sf::Text>());
-
-	app.get_state().top()->add_tilemap(fountain.get_map());
-	app.get_state().top()->add_tilemap(dirtpath.get_map());
-	app.get_state().top()->add_tilemap(lake.get_map());
-	app.get_state().top()->add_tilemap(squares.get_map());
-
-
 	sf::Text graphic_text;
 	sf::Text logic_text;
 	sf::Text build_info;
@@ -120,16 +103,13 @@ int main(int argc, char* argv[])
 	objects.setScale(0.5f, 0.5f);
 	objects.setPosition(app.get_window().getSize().x - (objects.getGlobalBounds().width / 2), 0.f);
 
+	app.add_player(std::make_unique<sf::Sprite>(player));
 
-	//std::cout << "Attempted to add texts to current state\n";
-	app.get_state().top()->add_text(std::make_unique<sf::Text>(logic_text));
-	app.get_state().top()->add_text(std::make_unique<sf::Text>(graphic_text));
-	app.get_state().top()->add_text(std::make_unique<sf::Text>(build_info));
-	app.get_state().top()->add_text(std::make_unique<sf::Text>(player_position));
-	app.get_state().top()->add_text(std::make_unique<sf::Text>(objects));
-
-
-	//std::cout << "State object count: " << app.get_state().top()->get_obj_count() << "\n";
+	app.add_text(std::make_unique<sf::Text>(graphic_text));
+	app.add_text(std::make_unique<sf::Text>(logic_text));
+	app.add_text(std::make_unique<sf::Text>(build_info));
+	app.add_text(std::make_unique<sf::Text>(player_position));
+	app.add_text(std::make_unique<sf::Text>(objects));
 	try
 	{
 		app.run();

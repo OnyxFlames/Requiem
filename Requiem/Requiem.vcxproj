@@ -29,7 +29,6 @@
     <ClInclude Include="Debug_Utils.hpp" />
     <ClInclude Include="DialogBox.hpp" />
     <ClInclude Include="Entity.hpp" />
-    <ClInclude Include="Loading_State.hpp" />
     <ClInclude Include="Lua\lapi.h" />
     <ClInclude Include="Lua\lauxlib.h" />
     <ClInclude Include="Lua\lcode.h" />
@@ -60,8 +59,6 @@
     <ClInclude Include="Maps\Tilemap.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="ResourceManagers\TextureManager.hpp" />
-    <ClInclude Include="States\Game_State.hpp" />
-    <ClInclude Include="States\Playing_State.hpp" />
     <ClInclude Include="TilemapManager.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -71,13 +68,11 @@
     <ClCompile Include="Application_debug.cpp" />
     <ClCompile Include="Application_loading.cpp" />
     <ClCompile Include="Application_render.cpp" />
-    <ClCompile Include="Application_states.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionMesh.cpp" />
     <ClCompile Include="Debug_Utils.cpp" />
     <ClCompile Include="DialogBox.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Loading_State.cpp" />
     <ClCompile Include="Lua\lapi.c" />
     <ClCompile Include="Lua\lauxlib.c" />
     <ClCompile Include="Lua\lbaselib.c" />
@@ -116,8 +111,6 @@
     <ClCompile Include="Maps\Tilemap.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManagers\TextureManager.cpp" />
-    <ClCompile Include="States\Game_State.cpp" />
-    <ClCompile Include="States\Playing_State.cpp" />
     <ClCompile Include="TilemapManager.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -4,37 +4,45 @@ sf::RenderWindow& Application::get_window()
 {
 	return window;
 }
-const std::vector<std::unique_ptr<sf::Sprite>>& Application::get_maps()
-{
-	//Note:
-	//	You may be able to use this function to funnel out tilemaps within the windows view, and tilemaps that 
-	//	are not by checking their bounds/size and seeing if it's currently within a given (configurable) range.
-	return tilemaps;
-}
-const std::vector<std::unique_ptr<sf::Sprite>>& Application::get_sprites()
-{
-	// See above note.
-	return sprites;
-}
-const std::vector<std::unique_ptr<sf::Sprite>>& Application::get_players()
-{
-	return players;
-}
-const std::vector<std::unique_ptr<AnimatedSprite>>& Application::get_a_sprites()
-{
-	return a_sprites;
-}
-const std::vector<std::unique_ptr<sf::Text>>& Application::get_texts()
-{
-	return texts;
-}
 
-const std::vector<std::unique_ptr<CollisionMesh>>& Application::get_collmeshes()
+void Application::render()
 {
-	return collisions;
-}
 
-const std::vector <std::unique_ptr<DialogBox>>& Application::get_dialogs()
-{
-	return dialogs;
+	static sf::Clock timer;
+	static sf::Time frame_count;
+	static unsigned int frames = 0;
+	if (frame_count <= sf::milliseconds(1000))
+	{
+		frames++;
+		frame_count += timer.restart();
+	}
+	else
+	{
+		frame_count = sf::seconds(0.f);
+		texts.at(graphic_rate)->setString("Graphic rate: " + std::to_string(frames));
+		frames = 0;
+	}
+
+	window.clear(void_color);
+
+	for (auto &c : tilemaps)
+		window.draw(*c);
+	for (auto &c : sprites)
+		window.draw(*c);
+	for (auto &c : players)
+		window.draw(*c);
+	for (auto &coll_mesh : collisions)
+	{
+		for (auto &meshes : coll_mesh.get()->get_collmesh())
+		{
+			sf::RectangleShape shape(sf::Vector2f(static_cast<float>(meshes.width), static_cast<float>(meshes.height)));
+			shape.setPosition(static_cast<float>(meshes.left), static_cast<float>(meshes.top));
+			shape.setFillColor(sf::Color(255, 0, 0, 82));
+			window.draw(shape);
+		}
+	}
+	for (auto &c : texts)
+		window.draw(*c);
+
+	window.display();
 }

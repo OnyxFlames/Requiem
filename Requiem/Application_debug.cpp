@@ -1,7 +1,7 @@
 #include "Application.hpp"
 
 
-void Application::handle_command(std::string &_command)
+/*void Application::handle_command(std::string &_command)
 {
 	while (_command != "resume")
 	{
@@ -103,4 +103,4 @@ size_t Application::get_obj_count()
 		get_sprites().size() +
 		get_texts().size();
 	return count;
-}
+}*/

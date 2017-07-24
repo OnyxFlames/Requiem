@@ -18,9 +18,9 @@
 
 #include "DialogBox.hpp"
 
-#include "States/Game_State.hpp"
-
 #include "Lua_Main.hpp"
+
+#include "Builtins.hpp"
 
 /*
 enum builtins_index : unsigned char
@@ -50,7 +50,7 @@ private:
 	std::vector<std::unique_ptr<DialogBox>> dialogs;
 	std::vector<std::unique_ptr<sf::Text>> texts;
 	
-	std::stack<std::unique_ptr<Game_State>> states;
+	sf::Color void_color = sf::Color(0, 0, 0);
 
 	sf::Event event;
 
@@ -67,9 +67,8 @@ private:
 
 	void input();
 	// Fixed logical update rate. Averages out to 58-60 updates/sec
-	const sf::Time time_step = sf::seconds(1.0f / 61.5f);
+	const sf::Time time_step = sf::seconds(1.0f / 60.f);//sf::seconds(1.0f / 61.5f);
 	void update(sf::Time dt);
-
 	//movement flags
 	const float move_speed = 0.00015f;
 	bool m_moveup = false, m_moveleft = false, m_movedown = false, m_moveright = false;
@@ -77,16 +76,10 @@ private:
 
 	bool check_collision(sf::Vector2f pos, sf::Time dt, uint8_t direction);
 	/*Debug functions and data members*/
-	void handle_command(std::string &_command);
+	//void handle_command(std::string &_command);
 	bool debug_noclip = false;
-	size_t get_obj_count();
 public:
-
-	/*Game State Test Code*/
-	void pushState(std::unique_ptr<Game_State> state);
-	void popState();
-	void changeState(std::unique_ptr<Game_State> state);
-	std::stack<std::unique_ptr<Game_State>>& get_state();
+	void render();
 	sf::Vector2f getHUD()
 	{
 		return
@@ -123,15 +116,9 @@ public:
 	void add_a_sprite(std::unique_ptr<AnimatedSprite> _a_sprite);
 	void add_collisionmesh(std::unique_ptr<CollisionMesh> coll_mesh);
 	void add_dialog(std::unique_ptr<DialogBox> dialog_box);
+	void add_text(std::unique_ptr<sf::Text> text);
 	// Rendering helper functions. Defined in Application_render.cpp
 	sf::RenderWindow& get_window();
-	const std::vector<std::unique_ptr<sf::Sprite>>& get_maps();
-	const std::vector<std::unique_ptr<sf::Sprite>>& get_sprites();
-	const std::vector<std::unique_ptr<sf::Sprite>>& get_players();
-	const std::vector<std::unique_ptr<AnimatedSprite>>& get_a_sprites();
-	const std::vector<std::unique_ptr<sf::Text>>& get_texts();
-	const std::vector<std::unique_ptr<CollisionMesh>>& get_collmeshes();
-	const std::vector <std::unique_ptr<DialogBox>>& get_dialogs();
 	const sf::Vector2u get_window_size()
 	{
 		return window.getSize();

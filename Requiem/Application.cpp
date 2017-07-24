@@ -7,8 +7,6 @@
 
 #include "build_info.hpp" // Debug_Utils.hpp included here
 
-#include "States/Playing_State.hpp"
-
 /*
 TEST CODE
 */
@@ -17,17 +15,6 @@ TEST CODE
 #include "ResourceManagers/TextureManager.hpp"
 
 #include "AnimatedSprite.hpp"
-
-/*...*/
-
-
-/*
-*	Somewhere where it allocates resources, the game state isn't getting the right ones
-*	POTENTIAL FIXES
-	*	Make the draw loop check if there's any current states, otherwise don't attempt to draw.
-	*	Figure out better ways to prepare and add states to the game, maybe make the game push a default (loading) state before pushing the new gameplay state.
-*
-*/
 
 Application::Application()
 	: window(sf::VideoMode(DEFAULT_SCREENWIDTH, DEFAULT_SCREENHEIGHT), "Game Demo"), render_thread(&render_thread_function, this)
@@ -67,62 +54,10 @@ Application::Application()
 		}
 		
 		window.setSize(dimensions);
+		camera.setSize(sf::Vector2f((float)window.getSize().x, (float)window.getSize().y));
 
 	}
 
-
-	/*Game State Test Code*/
-	/*
-	TextureManager tm;
-	tm.load(TextureID::City, "../resources/textures/roguelikeCity_transparent.png");
-	tm.load(TextureID::Cave, "../resources/textures/roguelikeDungeon_transparent.png");
-	tm.load(TextureID::Characters, "../resources/textures/roguelikeChar_transparent.png");
-
-	sf::Sprite player;
-	player.setTexture(tm.get(TextureID::Characters));
-	player.setTextureRect(sf::IntRect(0, 0, 16, 16));
-
-	Tilemap squares;
-	squares.load_from_file("../resources/maps/Squares.rmap");
-	squares.set_texture(tm.get(TextureID::City));
-
-	Tilemap lake;
-	lake.set_texture(tm.get(TextureID::Cave));
-	lake.load_from_file("../resources/maps/Lake.rmap");
-
-	Tilemap dirtpath;
-	dirtpath.set_texture(tm.get(TextureID::City));
-	dirtpath.load_from_file("../resources/maps/DirtPath.rmap");
-
-	Tilemap fountain;
-	fountain.set_texture(tm.get(TextureID::City));
-	fountain.load_from_file("../resources/maps/DevTest.rmap");
-
-	AnimatedSprite anim;
-	anim.setTexture(tm.get(TextureID::Characters));
-	anim.setPosition(256, 128);
-	anim.load_from_file("../resources/animations/PlayerWeaponSwap.anim");
-
-	AnimatedSprite weapon_changer;
-	weapon_changer.setTexture(tm.get(TextureID::Characters));
-	weapon_changer.setPosition(288, 128);
-	weapon_changer.load_from_file("../resources/animations/PlayerWeaponSwap.anim");
-
-	CollisionMesh coll;
-	coll.load_from_file("../resources/meshes/OutsideBounds.coll");
-	*/
-	pushState(std::make_unique<Playing_State>(*this));
-	/*
-	get_state().top()->add_player(std::make_unique<sf::Sprite>(player));
-	//get_state().top()->add_a_sprite(std::make_unique<AnimatedSprite>(anim));
-	//get_state().top()->add_a_sprite(std::make_unique<AnimatedSprite>(weapon_changer));
-	get_state().top()->add_collisionmesh(std::make_unique<CollisionMesh>(coll));
-
-	get_state().top()->add_tilemap(fountain.get_map());
-	get_state().top()->add_tilemap(dirtpath.get_map());
-	get_state().top()->add_tilemap(lake.get_map());
-	get_state().top()->add_tilemap(squares.get_map());
-	*/
 
 	window.setActive(false);
 	render_thread.launch();
@@ -141,12 +76,13 @@ void Application::input()
 			case sf::Event::Closed:
 				exit_render = true;
 				std::cout << "[App] Waiting on render thread to close...\n";
-				render_thread.wait(); break;
 				window.close();
+				render_thread.wait();
 				break;
 			case sf::Event::Resized:
 				window.setSize({ event.size.width, event.size.height });
 				texts.at(build_info)->setString("Build v" + BUILD_VERSION_MAJOR + "." + BUILD_VERSION_MINOR + "\nResolution: " + (std::to_string(window.getSize().x) + "x" + std::to_string(window.getSize().y)));
+				camera.setSize({ (float)event.size.width, (float)event.size.height });
 				break;
 				/*-Key Pressed Events*/
 		case sf::Event::KeyPressed:
@@ -154,9 +90,9 @@ void Application::input()
 				{
 					case sf::Keyboard::Escape:
 						exit_render = true;
-						std::cout << "Waiting on render thread to close...\n";
-						render_thread.wait();
+						std::cout << "[App] Waiting on render thread to close...\n";
 						window.close();
+						render_thread.wait();
 						break;
 					case sf::Keyboard::W:
 						m_moveup = true;
@@ -244,6 +180,8 @@ void Application::input()
 				case sf::Mouse::Left:
 					break;
 				}
+				break;
+			
 			}
 		}
 	}
@@ -304,7 +242,7 @@ void Application::update(sf::Time dt)
 		texts[logic_rate].get()->setString("Logic rate: \t" + std::to_string(frames));
 		frame_count = sf::seconds(0.f);
 		frames = 0;
-		return;
+		//return;
 	}
 	/*If the game is paused, change the delta to 0 for updates*/
 	if (is_paused)
@@ -363,8 +301,6 @@ void Application::update(sf::Time dt)
 
 	buff.str("");
 
-	buff << "Objects: " << get_obj_count();
-
 	texts.at(objects)->setString(buff.str());
 	texts.at(objects)->setPosition(
 		window.getSize().x - (texts.at(objects)->getGlobalBounds().width + 10.f),
@@ -381,6 +317,12 @@ void Application::update(sf::Time dt)
 	for (auto &asprite : a_sprites)
 		asprite->update(dt);
 
+	const sf::Vector2f text_spacing = { 0.5f, 17.5f };
+	texts.at(logic_rate)->setPosition(getHUD(camera));
+	texts.at(graphic_rate)->setPosition(getHUD(camera) + text_spacing);
+	texts.at(build_info)->setPosition(getHUD(camera) + text_spacing + text_spacing);
+	texts.at(player_pos)->setPosition(getHUD(camera) + text_spacing + text_spacing + text_spacing + text_spacing);
+
 	window.setView(camera);
 
 }
@@ -390,12 +332,8 @@ void Application::run()
 	sf::Clock clock;
 	while (window.isOpen())
 	{
-		//std::cout << "In run loop\n";
-		states.top()->input();
-		states.top()->update(clock.restart());
-		//states.top()->draw();
-		//input();
-		//update(clock.restart());
+		input();
+		update(clock.restart());
 	}
 }
 Application::~Application()

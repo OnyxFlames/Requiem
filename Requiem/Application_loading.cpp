@@ -20,3 +20,7 @@ void Application::add_dialog(std::unique_ptr<DialogBox> dialog_box)
 {
 	dialogs.push_back(std::move(dialog_box));
 }
+void Application::add_text(std::unique_ptr<sf::Text> text)
+{
+	texts.push_back(std::move(text));
+}

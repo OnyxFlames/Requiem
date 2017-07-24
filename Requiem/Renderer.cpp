@@ -32,8 +32,10 @@ void render_thread_function(Application *application)
 
 		sf::sleep(sf::seconds(2.5f));
 
-		while (application->get_window().isOpen() && !application->get_state().empty())
-			application->get_state().top()->draw();
+
+		application->get_window().clear();
+		while (application->get_window().isOpen())
+			application->render();
 	}
 	catch (std::exception e)
 	{
