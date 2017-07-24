@@ -30,7 +30,10 @@ public:
 		//std::cout << "Setting default camera\n";
 		camera = app->get_window().getView();
 	}
-
+	~Playing_State()
+	{
+		std::clog << "[State: Playing]: Destroying state.\n";
+	}
 	virtual void input() override;
 	virtual void update(sf::Time dt) override;
 	virtual void draw() override;

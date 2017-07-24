@@ -52,7 +52,6 @@ Application::Application()
 		else
 		{
 			dimensions.x = (unsigned)lua_tonumber(L, 1);
-			std::cout << lua_tonumber(L, 1) << "\n";
 			lua_pop(L, 1);
 		}
 		lua_getglobal(L, "height");
@@ -125,14 +124,6 @@ Application::Application()
 	get_state().top()->add_tilemap(squares.get_map());
 	*/
 
-	// Text stuff was removed here.
-
-	if (get_state().top()->get_texts().size() < 5)
-	{
-		// Display the amount of texts that failed to load. Right now we're adding 5 so subtracts the vectors size from 5.
-		//std::cout << "Failed to load text: " << (5 - get_state().top()->get_texts().size()) << "/5 failed\n";
-	}
-
 	window.setActive(false);
 	render_thread.launch();
 }
@@ -143,7 +134,7 @@ void Application::input()
 	{
 		if(window.pollEvent(event))
 		{
-			std::string command = "";
+			//std::string command = "";
 			switch (event.type)
 			{
 				/*-Non-keyboard input based events-*/
@@ -209,7 +200,7 @@ void Application::input()
 						break;
 					case sf::Keyboard::T:
 						std::cout << "> ";
-						handle_command(command);
+						//handle_command(command);
 						break;
 #ifdef DEBUG	/*Debug for dialog box testing*/
 
@@ -409,4 +400,5 @@ void Application::run()
 }
 Application::~Application()
 {
+	std::clog << "[App] Destroying app.\n";
 }

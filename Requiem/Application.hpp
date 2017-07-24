@@ -22,8 +22,6 @@
 
 #include "Lua_Main.hpp"
 
-
-
 /*
 enum builtins_index : unsigned char
 {
@@ -83,6 +81,7 @@ private:
 	bool debug_noclip = false;
 	size_t get_obj_count();
 public:
+
 	/*Game State Test Code*/
 	void pushState(std::unique_ptr<Game_State> state);
 	void popState();
@@ -116,7 +115,6 @@ public:
 	bool exit_render = false;
 	Application();
 	~Application();
-
 	void run();
 
 	// Loading helper functions. Defined in Application_loading.cpp

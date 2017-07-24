@@ -24,6 +24,7 @@ void Playing_State::input()
 			case sf::Event::Resized:
 				app->get_window().setSize({ event.size.width, event.size.height });
 				texts.at(build_info)->setString("Build v" + BUILD_VERSION_MAJOR + "." + BUILD_VERSION_MINOR + "\nResolution: " + (std::to_string(app->get_window().getSize().x) + "x" + std::to_string(app->get_window().getSize().y)));
+				camera.setSize({ (float)event.size.width, (float)event.size.height });
 				break;
 				/*-Key Pressed Events*/
 			case sf::Event::KeyPressed:
@@ -31,9 +32,10 @@ void Playing_State::input()
 				{
 				case sf::Keyboard::Escape:
 					app->exit_render = true;
-					std::cout << "Waiting on render thread to close...\n";
-					app->close_render_thread(true);
+					std::cout << "[Thread: Renderer]: Closing...\n";
 					app->get_window().close();
+					app->close_render_thread(true);
+					//app->get_window().close();
 					break;
 				case sf::Keyboard::W:
 					m_moveup = true;
@@ -196,7 +198,6 @@ void Playing_State::update(sf::Time dt)
 	// If this like wasn't here, the game would crash
 	if (players.size() < 1)
 		return;
-
 
 	if (m_moveup)
 	{

@@ -17,6 +17,11 @@ class Game_State
 public:
 	Game_State(Application &_app);
 	
+	~Game_State()
+	{
+		std::clog << "[State: Game]: Destroying state.\n";
+	}
+
 	virtual void input() = 0;
 	virtual void update(sf::Time dt) = 0;
 	virtual void draw() = 0;

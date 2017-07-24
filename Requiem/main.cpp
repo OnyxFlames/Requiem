@@ -130,8 +130,13 @@ int main(int argc, char* argv[])
 
 
 	//std::cout << "State object count: " << app.get_state().top()->get_obj_count() << "\n";
-
-	app.run();
-	
+	try
+	{
+		app.run();
+	}
+	catch (std::exception e)
+	{
+		std::cerr << "[Thread: Logic]: " << e.what() << std::endl;
+	}
 	return 0;
 }
