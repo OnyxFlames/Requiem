@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 
 #include <memory>
-
 #include <vector>
 #include <stack>
 #include <iostream>
@@ -22,6 +21,8 @@
 
 #include "Builtins.hpp"
 
+#include "Console/Console.hpp"
+
 /*
 enum builtins_index : unsigned char
 {
@@ -34,6 +35,8 @@ enum builtins_index : unsigned char
 */
 #define DEFAULT_SCREENWIDTH 1280
 #define DEFAULT_SCREENHEIGHT 720
+
+class Console;
 
 class Application
 {
@@ -55,6 +58,9 @@ private:
 	sf::Event event;
 
 	sf::Font default_font;
+
+	//Console *console; = new Console(*this, default_font);
+	std::unique_ptr<Console> console;
 
 	lua_State *L = init_lua();
 	

@@ -44,5 +44,7 @@ void Application::render()
 	for (auto &c : texts)
 		window.draw(*c);
 
+	console->draw();
+
 	window.display();
 }

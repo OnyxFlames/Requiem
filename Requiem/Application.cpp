@@ -58,6 +58,8 @@ Application::Application()
 
 	}
 
+	console = std::make_unique<Console>(Console(*this, default_font));
+
 
 	window.setActive(false);
 	render_thread.launch();
@@ -88,6 +90,11 @@ void Application::input()
 		case sf::Event::KeyPressed:
 				switch (event.key.code)
 				{
+					case sf::Keyboard::Return:
+						if (console->is_active())
+							console->execute();
+						console->toggle();
+					break; 
 					case sf::Keyboard::Escape:
 						exit_render = true;
 						std::cout << "[App] Waiting on render thread to close...\n";
@@ -95,37 +102,44 @@ void Application::input()
 						render_thread.wait();
 						break;
 					case sf::Keyboard::W:
-						m_moveup = true;
+						if(!console->is_active())
+							m_moveup = true;
 						break;
 					case sf::Keyboard::A:
-						m_moveleft = true;
+						if (!console->is_active())
+							m_moveleft = true;
 						break;
 					case sf::Keyboard::S:
-						m_movedown = true;
+						if (!console->is_active())
+							m_movedown = true;
 						break;
 					case sf::Keyboard::D:
-						m_moveright = true;
+						if (!console->is_active())
+							m_moveright = true;
 						break;
 					case sf::Keyboard::I:
-						camera.zoom(0.5f);
+						if (!console->is_active())
+							camera.zoom(0.5f);
 #ifdef DEBUG
-						std::cout << "Zoom in to: ";
-						std::cout << camera.getSize().x << "x" << camera.getSize().y << "\n";
+						//std::cout << "Zoom in to: ";
+						//std::cout << camera.getSize().x << "x" << camera.getSize().y << "\n";
 #endif
 						break;
 					case sf::Keyboard::O:
-						camera.zoom(2.f);
+						if (!console->is_active())
+							camera.zoom(2.f);
 #ifdef DEBUG
-						std::cout << "Zoomout to: ";
-						std::cout << camera.getSize().x << "x" << camera.getSize().y << "\n";
+						//std::cout << "Zoomout to: ";
+						//std::cout << camera.getSize().x << "x" << camera.getSize().y << "\n";
 #endif
 						break;
 					case sf::Keyboard::P:
+						if (!console->is_active())
 						camera_follow_player = !camera_follow_player;
-						std::cout << "Following player: " << std::boolalpha << camera_follow_player << "\n";
+						//std::cout << "Following player: " << std::boolalpha << camera_follow_player << "\n";
 						break;
 					case sf::Keyboard::U:
-						std::cout << "Reset camera values.\n";
+						//std::cout << "Reset camera values.\n";
 						if (camera_follow_player)
 							camera_follow_player = false;
 
@@ -134,23 +148,6 @@ void Application::input()
 						while (camera.getSize().x < window.getSize().x)
 							camera.zoom(2.f);
 						break;
-					case sf::Keyboard::T:
-						std::cout << "> ";
-						//handle_command(command);
-						break;
-#ifdef DEBUG	/*Debug for dialog box testing*/
-
-					case sf::Keyboard::B:
-						std::cout << "Updating dialog box...\n";
-						updateDialogBox = true;
-						/*the updateDialogBox variable is using in Render.cpp to update the box bounds and position for the dialog box.(will eventually turn into a class)*/
-						break;
-
-#endif
-#ifdef DEBUG	/*Debug for keycode testing*/
-					default:
-						std::cerr << "Unknown keycode: " << event.key.code << "\n";
-#endif
 				}
 				break;
 				/*-Key Released Events*/
@@ -181,7 +178,10 @@ void Application::input()
 					break;
 				}
 				break;
-			
+			case sf::Event::TextEntered:
+				if (console->is_active())
+					console->update_string(event.text.unicode);
+				break;
 			}
 		}
 	}

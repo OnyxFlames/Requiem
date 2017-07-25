@@ -26,6 +26,7 @@
     <ClInclude Include="Builtins.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="CollisionMesh.hpp" />
+    <ClInclude Include="Console\Console.hpp" />
     <ClInclude Include="Debug_Utils.hpp" />
     <ClInclude Include="DialogBox.hpp" />
     <ClInclude Include="Entity.hpp" />
@@ -70,6 +71,7 @@
     <ClCompile Include="Application_render.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionMesh.cpp" />
+    <ClCompile Include="Console\Console.cpp" />
     <ClCompile Include="Debug_Utils.cpp" />
     <ClCompile Include="DialogBox.cpp" />
     <ClCompile Include="Entity.cpp" />
