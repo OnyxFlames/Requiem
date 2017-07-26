@@ -1,6 +1,13 @@
 #include "Console.hpp"
 
 #include <iostream>
+#include <cctype>
+
+void to_lower(std::string& str)
+{
+	for (auto &c : str)
+		c = std::tolower(c);
+}
 
 Console::Console()
 {
@@ -48,11 +55,16 @@ void Console::update_string(const char c)
 }
 void Console::update()
 {
+	sf::String str = active_text.getString();
+	str.erase(str.getSize() - 1);
+	active_text.setString(str);
+	sf::Text temp = active_text;
+	history.push_back(temp);
+	command_str = "";
 	for (size_t txt = history.size(); txt > 0; txt--)
 	{
 		history[history.size() - txt].setPosition(1.f, app->get_window_size().y - text_box.getGlobalBounds().height * (txt + 1));
 	}
-
 }
 bool Console::is_active()
 {
@@ -71,12 +83,27 @@ void Console::execute()
 {
 	if (command_str == "")
 		return;
-	sf::String str = active_text.getString();
-	str.erase(str.getSize() - 1);
-	active_text.setString(str);
-	sf::Text temp = active_text;
-	//temp.setPosition(1.f, 0.f);
-	history.push_back(temp);
-	command_str = "";
+	std::string command = command_str.substr(0, command_str.find(' '));
+	std::string arg = command_str.substr(command.size()+1);
+	if (arg.size() == 0)
+		return;
+	to_lower(arg);
+	if (command == "/voidcolor" || command == "/voidcolour")
+	{
+		if (arg == "black")
+			app->void_color = sf::Color::Black;
+		else if (arg == "red")
+			app->void_color = sf::Color::Red;
+		else if (arg == "green")
+			app->void_color = sf::Color::Green;
+		else if (arg == "blue")
+			app->void_color = sf::Color::Blue;
+		else if (arg == "grey" || arg == "gray")
+			app->void_color = sf::Color(127, 127, 127);
+		else if (arg == "white")
+			app->void_color = sf::Color(255, 255, 255);
+		else
+			active_text.setString("Error: '" + arg + "' is not a valid option.");
+	}
 	update();
 }
