@@ -92,3 +92,29 @@ bool Tilemap::load_from_file(const std::string &filename)
 	}
 	return true;
 }
+void Tilemap::set_position(sf::Vector2f& _pos)
+{
+	pos = _pos;
+}
+void Tilemap::set_texture(const sf::Texture texture)
+{
+	spritesheet = texture;
+}
+std::unique_ptr<sf::Texture> Tilemap::generate_map()
+{
+	return std::move(map_finished);
+}
+void Tilemap::construct_map()
+{
+	map_width = 128; map_height = 128;
+	for (unsigned h = 0; h < map_height; h++)
+	{
+		std::vector<sf::Vector2f> vecbuff;
+		for (unsigned w = 0; w < map_width; w++)
+		{
+			vecbuff.push_back(sf::Vector2f(-1, -1));
+		}
+		data.push_back(vecbuff);
+	}
+}
+std::vector<std::vector<sf::Vector2f>>& Tilemap::get_data() { return data; }

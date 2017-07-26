@@ -36,6 +36,29 @@ void Console::draw()
 	}
 }
 
+void Console::update_string(const char c)
+{
+	if (c != '\b')
+		command_str += c;
+	else if (command_str.size() > 0)
+		command_str.erase(command_str.begin() + command_str.size() - 1);
+	if (command_str[0] == 13)
+		command_str.erase(command_str.begin());
+	active_text.setString(command_str + '|');
+}
+void Console::update()
+{
+
+}
+bool Console::is_active()
+{
+	return active;
+}
+void Console::toggle()
+{
+	active = !active;
+}
+
 Console::~Console()
 {
 }

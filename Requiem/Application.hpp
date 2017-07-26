@@ -38,8 +38,6 @@ enum builtins_index : unsigned char
 
 class Console;
 
-
-
 class Application
 {
 private:
@@ -67,16 +65,15 @@ private:
 
 	void input();
 	// Fixed logical update rate. Averages out to 58-60 updates/sec
-	const sf::Time time_step = sf::seconds(1.0f / 60.f);//sf::seconds(1.0f / 61.5f);
+	const sf::Time time_step = sf::seconds(1.0f / 60.f);
 	void update(sf::Time dt);
-	//movement flags
+	
+	// movement flags
 	const float move_speed = 0.00015f;
 	bool m_moveup = false, m_moveleft = false, m_movedown = false, m_moveright = false;
 	bool camera_follow_player = false;
 
 	bool check_collision(sf::Vector2f pos, sf::Time dt, uint8_t direction);
-	/*Debug functions and data members*/
-	//void handle_command(std::string &_command);
 	bool debug_noclip = false;
 	std::vector<std::unique_ptr<sf::Sprite>> players;
 	std::vector<std::unique_ptr<sf::Sprite>> tilemaps;
@@ -93,22 +90,8 @@ public:
 	void add_dialog(std::unique_ptr<DialogBox> dialog_box);
 	void add_text(std::unique_ptr<sf::Text> text);
 	void render();
-	sf::Vector2f getHUD()
-	{
-		return
-		{ 
-			camera.getCenter().x - camera.getSize().x / 2,
-			camera.getCenter().y - camera.getSize().y / 2
-		};
-	}
-	sf::Vector2f getHUD(sf::View &camera)
-	{
-		return
-		{
-			camera.getCenter().x - camera.getSize().x / 2,
-			camera.getCenter().y - camera.getSize().y / 2
-		};
-	}
+	sf::Vector2f getHUD();
+	sf::Vector2f getHUD(sf::View &camera);
 
 	bool is_paused = false;
 	// if the game is closing then let the render thread end first.
@@ -121,19 +104,7 @@ public:
 
 	// Rendering helper functions. Defined in Application_render.cpp
 	sf::RenderWindow& get_window();
-	const sf::Vector2u get_window_size()
-	{
-		return window.getSize();
-	}
-	void close_render_thread(bool force = false)
-	{
-		if (is_multithreaded)
-		{
-			if (force)
-				render_thread.terminate();
-			else if (!force)
-				render_thread.wait();
-		}
-	}
+	const sf::Vector2u get_window_size();
+	void close_render_thread(bool force = false);
 };
 

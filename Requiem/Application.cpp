@@ -336,6 +336,36 @@ void Application::run()
 		update(clock.restart());
 	}
 }
+sf::Vector2f Application::getHUD()
+{
+	return
+	{
+		camera.getCenter().x - camera.getSize().x / 2,
+		camera.getCenter().y - camera.getSize().y / 2
+	};
+}
+sf::Vector2f Application::getHUD(sf::View &camera)
+{
+	return
+	{
+		camera.getCenter().x - camera.getSize().x / 2,
+		camera.getCenter().y - camera.getSize().y / 2
+	};
+}
+const sf::Vector2u Application::get_window_size()
+{
+	return window.getSize();
+}
+void Application::close_render_thread(bool force)
+{
+	if (is_multithreaded)
+	{
+		if (force)
+			render_thread.terminate();
+		else if (!force)
+			render_thread.wait();
+	}
+}
 Application::~Application()
 {
 	std::clog << "[App] Destroying app.\n";

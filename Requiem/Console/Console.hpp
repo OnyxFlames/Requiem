@@ -22,30 +22,12 @@ private:
 public:
 	Console();
 	Console(Application &_app, sf::Font &_font);
-	void update_string(const char c)
-	{
-		if (c != '\b')
-			command_str += c;
-		else if (command_str.size() > 0)
-			command_str.erase(command_str.begin() + command_str.size() - 1);
-		if (command_str[0] == 13)
-			command_str.erase(command_str.begin());
-		active_text.setString(command_str + '|');
-	}
-	void update()
-	{
-
-	}
+	void update_string(const char c);
+	void update();
 	~Console();
 	void draw();
-	bool is_active()
-	{
-		return active;
-	}
-	void toggle()
-	{
-		active = !active;
-	}
+	bool is_active();
+	void toggle();
 	void execute();
 };
 
