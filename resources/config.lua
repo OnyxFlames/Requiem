@@ -1,5 +1,4 @@
 width = 1280
-
 height = 720
-
-fullscreen = 10
+frameratelock = 0
+verticalsync = false

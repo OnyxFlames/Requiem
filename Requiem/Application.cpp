@@ -19,8 +19,10 @@ TEST CODE
 Application::Application()
 	: window(sf::VideoMode(DEFAULT_SCREENWIDTH, DEFAULT_SCREENHEIGHT), "Game Demo"), render_thread(&render_thread_function, this)
 {	
+	//TODO: move all this code into an init function.
 	// load config information
 	sf::Vector2u dimensions = { DEFAULT_SCREENWIDTH, DEFAULT_SCREENHEIGHT };
+	bool verticalsync = false;
 	std::ifstream lua("../resources/config.lua");
 	if (!lua.is_open())
 	{
@@ -52,10 +54,20 @@ Application::Application()
 			dimensions.y = (unsigned)lua_tonumber(L, 1);
 			lua_pop(L, 1);
 		}
-		
+		lua_getglobal(L, "verticalsync");
+		if (lua_isboolean(L, 1) == 0)
+		{
+			std::cerr << "[Lua] Config file error! 'verticalsync' is not a boolean.\n";
+			lua_pop(L, 1);
+		}
+		else
+		{
+			verticalsync = (bool)lua_toboolean(L, 1);
+			lua_pop(L, 1);
+		}
 		window.setSize(dimensions);
 		camera.setSize(sf::Vector2f((float)window.getSize().x, (float)window.getSize().y));
-
+		window.setVerticalSyncEnabled(verticalsync);
 	}
 
 	console = std::make_unique<Console>(Console(*this, default_font));
