@@ -23,6 +23,7 @@ Application::Application()
 	// load config information
 	sf::Vector2u dimensions = { DEFAULT_SCREENWIDTH, DEFAULT_SCREENHEIGHT };
 	bool verticalsync = false;
+	unsigned frameratelock = 0;
 	std::ifstream lua("../resources/config.lua");
 	if (!lua.is_open())
 	{
@@ -62,16 +63,29 @@ Application::Application()
 		}
 		else
 		{
-			verticalsync = (bool)lua_toboolean(L, 1);
+#pragma warning(suppress : 4800)
+			verticalsync = lua_toboolean(L, 1);
 			lua_pop(L, 1);
 		}
+		lua_getglobal(L, "frameratelock");
+		if (lua_isnumber(L, 1) == 0)
+		{
+			std::cerr << "[Lua] Config file error! 'frameratelock' is not an integer\n.";
+			lua_pop(L, 1);
+		}
+		else
+		{
+			frameratelock = (unsigned)lua_tonumber(L, 1);
+			lua_pop(L, 1);
+		}
+		if (frameratelock)
+			window.setFramerateLimit(frameratelock);
 		window.setSize(dimensions);
 		camera.setSize(sf::Vector2f((float)window.getSize().x, (float)window.getSize().y));
 		window.setVerticalSyncEnabled(verticalsync);
 	}
 
 	console = std::make_unique<Console>(Console(*this, default_font));
-
 
 	window.setActive(false);
 	render_thread.launch();
@@ -381,4 +395,5 @@ void Application::close_render_thread(bool force)
 Application::~Application()
 {
 	std::clog << "[App] Destroying app.\n";
+	lua_close(L);
 }
