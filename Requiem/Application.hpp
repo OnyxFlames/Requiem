@@ -41,6 +41,7 @@ class Console;
 class Application
 {
 private:
+	friend class Console;
 	sf::View camera;
 	sf::RenderWindow window;
 	sf::Thread render_thread;
@@ -50,7 +51,6 @@ private:
 	sf::Event event;
 
 	sf::Font default_font;
-
 	//Console *console; = new Console(*this, default_font);
 	std::unique_ptr<Console> console;
 

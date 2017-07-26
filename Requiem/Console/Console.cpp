@@ -28,7 +28,7 @@ void Console::draw()
 {
 	if (active)
 	{
-		sf::RenderWindow &win = app->get_window();
+		sf::RenderWindow &win = app->window;
 		win.draw(text_box);
 		win.draw(active_text);
 		for (auto &h : history)
@@ -48,6 +48,10 @@ void Console::update_string(const char c)
 }
 void Console::update()
 {
+	for (size_t txt = history.size(); txt > 0; txt--)
+	{
+		history[history.size() - txt].setPosition(1.f, app->get_window_size().y - text_box.getGlobalBounds().height * (txt + 1));
+	}
 
 }
 bool Console::is_active()
@@ -73,11 +77,6 @@ void Console::execute()
 	sf::Text temp = active_text;
 	//temp.setPosition(1.f, 0.f);
 	history.push_back(temp);
-
-	for (size_t txt = history.size(); txt > 0; txt--)
-	{
-		history[history.size() - txt].setPosition(1.f, app->get_window_size().y - text_box.getGlobalBounds().height * (txt + 1));
-	}
-
 	command_str = "";
+	update();
 }
