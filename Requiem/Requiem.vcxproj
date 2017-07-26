@@ -20,11 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.hpp" />
-    <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Application.hpp" />
     <ClInclude Include="build_info.hpp" />
     <ClInclude Include="Builtins.hpp" />
-    <ClInclude Include="Camera.hpp" />
     <ClInclude Include="CollisionMesh.hpp" />
     <ClInclude Include="Console\Console.hpp" />
     <ClInclude Include="Debug_Utils.hpp" />
@@ -64,12 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
-    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Application_debug.cpp" />
     <ClCompile Include="Application_loading.cpp" />
     <ClCompile Include="Application_render.cpp" />
-    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionMesh.cpp" />
     <ClCompile Include="Console\Console.cpp" />
     <ClCompile Include="Debug_Utils.cpp" />

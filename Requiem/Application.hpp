@@ -38,20 +38,14 @@ enum builtins_index : unsigned char
 
 class Console;
 
+
+
 class Application
 {
 private:
 	sf::View camera;
 	sf::RenderWindow window;
 	sf::Thread render_thread;
-	
-	std::vector<std::unique_ptr<sf::Sprite>> players;
-	std::vector<std::unique_ptr<sf::Sprite>> tilemaps;
-	std::vector<std::unique_ptr<AnimatedSprite>> a_sprites;
-	std::vector<std::unique_ptr<sf::Sprite>> sprites;
-	std::vector<std::unique_ptr<CollisionMesh>> collisions;
-	std::vector<std::unique_ptr<DialogBox>> dialogs;
-	std::vector<std::unique_ptr<sf::Text>> texts;
 	
 	sf::Color void_color = sf::Color(0, 0, 0);
 
@@ -84,7 +78,20 @@ private:
 	/*Debug functions and data members*/
 	//void handle_command(std::string &_command);
 	bool debug_noclip = false;
+	std::vector<std::unique_ptr<sf::Sprite>> players;
+	std::vector<std::unique_ptr<sf::Sprite>> tilemaps;
+	std::vector<std::unique_ptr<AnimatedSprite>> a_sprites;
+	std::vector<std::unique_ptr<sf::Sprite>> sprites;
+	std::vector<std::unique_ptr<CollisionMesh>> collisions;
+	std::vector<std::unique_ptr<DialogBox>> dialogs;
+	std::vector<std::unique_ptr<sf::Text>> texts;
 public:
+	void add_tilemap(std::unique_ptr<sf::Sprite> _tilemap);
+	void add_player(std::unique_ptr<sf::Sprite> _player);
+	void add_a_sprite(std::unique_ptr<AnimatedSprite> _a_sprite);
+	void add_collisionmesh(std::unique_ptr<CollisionMesh> coll_mesh);
+	void add_dialog(std::unique_ptr<DialogBox> dialog_box);
+	void add_text(std::unique_ptr<sf::Text> text);
 	void render();
 	sf::Vector2f getHUD()
 	{
@@ -102,13 +109,7 @@ public:
 			camera.getCenter().y - camera.getSize().y / 2
 		};
 	}
-	/*...*/
 
-	/*Debug dialog box code*/
-	bool updateDialogBox = false;
-	/*...*/
-
-	//bool is_loading = false;
 	bool is_paused = false;
 	// if the game is closing then let the render thread end first.
 	bool exit_render = false;
@@ -117,12 +118,7 @@ public:
 	void run();
 
 	// Loading helper functions. Defined in Application_loading.cpp
-	void add_tilemap(std::unique_ptr<sf::Sprite> _tilemap);
-	void add_player(std::unique_ptr<sf::Sprite> _player);
-	void add_a_sprite(std::unique_ptr<AnimatedSprite> _a_sprite);
-	void add_collisionmesh(std::unique_ptr<CollisionMesh> coll_mesh);
-	void add_dialog(std::unique_ptr<DialogBox> dialog_box);
-	void add_text(std::unique_ptr<sf::Text> text);
+
 	// Rendering helper functions. Defined in Application_render.cpp
 	sf::RenderWindow& get_window();
 	const sf::Vector2u get_window_size()
