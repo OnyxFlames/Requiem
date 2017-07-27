@@ -123,6 +123,7 @@
     <ClCompile Include="Console\Console.cpp">
       <Filter>Console</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="Console\Console.hpp">
       <Filter>Console</Filter>
     </ClInclude>
+    <ClInclude Include="Menu.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Maps">
@@ -241,6 +243,9 @@
     </Filter>
     <Filter Include="Console">
       <UniqueIdentifier>{cdce83f1-c8d1-4e86-a2af-8f3a5eee326a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{904b8c40-fdc1-40ee-a1f6-786ec2cd69a4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

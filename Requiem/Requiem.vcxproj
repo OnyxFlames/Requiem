@@ -56,6 +56,7 @@
     <ClInclude Include="Lua\lzio.h" />
     <ClInclude Include="Lua_Main.hpp" />
     <ClInclude Include="Maps\Tilemap.hpp" />
+    <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="ResourceManagers\TextureManager.hpp" />
     <ClInclude Include="TilemapManager.hpp" />
@@ -106,6 +107,7 @@
     <ClCompile Include="Lua_Main.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maps\Tilemap.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManagers\TextureManager.cpp" />
     <ClCompile Include="TilemapManager.cpp" />
