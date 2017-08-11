@@ -19,9 +19,13 @@
 
 #include "Lua_Main.hpp"
 
+#include "InputHandler.hpp"
+
 #include "Builtins.hpp"
 
 #include "Console/Console.hpp"
+
+
 
 /*
 enum builtins_index : unsigned char
@@ -37,11 +41,14 @@ enum builtins_index : unsigned char
 #define DEFAULT_SCREENHEIGHT 720
 
 class Console;
+class InputHandler;
 
 class Application
 {
 private:
 	friend class Console;
+	friend class InputHandler;
+
 	sf::View camera;
 	sf::RenderWindow window;
 	sf::Thread render_thread;
@@ -53,7 +60,9 @@ private:
 	sf::Font default_font;
 	//Console *console; = new Console(*this, default_font);
 	std::unique_ptr<Console> console;
-
+	
+	std::unique_ptr<InputHandler> ih;
+	
 	lua_State *L = init_lua();
 	
 	bool is_fullscreen = false;

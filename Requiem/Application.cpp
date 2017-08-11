@@ -86,11 +86,17 @@ Application::Application()
 	}
 
 	console = std::make_unique<Console>(Console(*this, default_font));
+	ih = std::make_unique<InputHandler>(InputHandler(*this));
 
 	window.setActive(false);
 	render_thread.launch();
 }
-
+void Application::input()
+{
+	sf::Event e;
+	ih->handle(e);
+}
+/*
 void Application::input()
 {
 	if (window.isOpen())
@@ -100,7 +106,7 @@ void Application::input()
 			//std::string command = "";
 			switch (event.type)
 			{
-				/*-Non-keyboard input based events-*/
+				//-Non-keyboard input based events-
 			case sf::Event::Closed:
 				exit_render = true;
 				std::cout << "[App] Waiting on render thread to close...\n";
@@ -112,7 +118,7 @@ void Application::input()
 				texts.at(build_info)->setString("Build v" + BUILD_VERSION_MAJOR + "." + BUILD_VERSION_MINOR + "\nResolution: " + (std::to_string(window.getSize().x) + "x" + std::to_string(window.getSize().y)));
 				camera.setSize({ (float)event.size.width, (float)event.size.height });
 				break;
-				/*-Key Pressed Events*/
+				//-Key Pressed Events
 		case sf::Event::KeyPressed:
 				switch (event.key.code)
 				{
@@ -176,7 +182,7 @@ void Application::input()
 						break;
 				}
 				break;
-				/*-Key Released Events*/
+				//Key Released Events
 			case sf::Event::KeyReleased:
 				switch (event.key.code)
 				{
@@ -212,7 +218,7 @@ void Application::input()
 		}
 	}
 }
-
+*/
 bool Application::check_collision(sf::Vector2f pos, sf::Time dt, uint8_t direction)
 {
 	switch (direction)
