@@ -60,7 +60,9 @@
     <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="ResourceManagers\TextureManager.hpp" />
+    <ClInclude Include="SoundTrigger.hpp" />
     <ClInclude Include="TilemapManager.hpp" />
+    <ClInclude Include="Triggers\TriggerBase.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
@@ -112,7 +114,9 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManagers\TextureManager.cpp" />
+    <ClCompile Include="SoundTrigger.cpp" />
     <ClCompile Include="TilemapManager.cpp" />
+    <ClCompile Include="Triggers\TriggerBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Todo.txt" />
