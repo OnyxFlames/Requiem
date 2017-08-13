@@ -13,6 +13,8 @@
 
 int main(int argc, char* argv[])
 {
+	std::cout << "Shaders available: " << std::boolalpha << sf::Shader::isAvailable() << '\n';
+
 	TextureManager tm;
 	tm.load(TextureID::City, "../resources/textures/roguelikeCity_transparent.png");
 	tm.load(TextureID::Cave, "../resources/textures/roguelikeDungeon_transparent.png");
